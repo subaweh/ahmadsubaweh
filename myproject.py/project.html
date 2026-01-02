@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Jastip Print Kampus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+        .container {
+            background: white;
+            width: 350px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+        }
+        button {
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Jastip Print Kampus</h2>
+
+    <label>Nama</label>
+    <input type="text" id="nama">
+
+    <label>Jumlah Halaman</label>
+    <input type="number" id="halaman">
+
+    <label>Jenis Print</label>
+    <select id="jenis">
+        <option value="500">Hitam Putih (Rp500)</option>
+        <option value="1000">Warna (Rp1000)</option>
+    </select>
+
+    <button onclick="kirimWA()">Pesan via WhatsApp</button>
+</div>
+
+<script>
+function kirimWA() {
+    let nama = document.getElementById("nama").value;
+    let halaman = document.getElementById("halaman").value;
+    let harga = document.getElementById("jenis").value;
+
+    let total = halaman * harga;
+
+    let pesan = `Halo, saya ${nama}
+Jumlah halaman: ${halaman}
+Total harga: Rp ${total}`;
+
+    let nomor = "628xxxxxxxxxx"; // ganti nomor WA
+    let url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+    window.open(url);
+}
+</script>
+
+</body>
+</html>

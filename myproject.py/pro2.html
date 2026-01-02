@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Jastip Print Kampus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #4CAF50, #2e7d32);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: white;
+            width: 360px;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2e7d32;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 12px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .total {
+            margin-top: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #43a047;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 15px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🖨️ Jastip Print Kampus</h2>
+
+    <label>Nama</label>
+    <input type="text" id="nama" placeholder="Masukkan nama">
+
+    <label>Jumlah Halaman</label>
+    <input type="number" id="halaman" placeholder="Contoh: 10" oninput="hitungTotal()">
+
+    <label>Jenis Print</label>
+    <select id="jenis" onchange="hitungTotal()">
+        <option value="500">Hitam Putih (Rp 500 / lembar)</option>
+        <option value="1000">Warna (Rp 1.000 / lembar)</option>
+    </select>
+
+    <div class="total">
+        Total: <span id="total">Rp 0</span>
+    </div>
+
+    <button onclick="kirimWA()">Pesan via WhatsApp</button>
+
+    <div class="footer">
+        Praktis • Cepat • Aman
+    </div>
+</div>
+
+<script>
+function hitungTotal() {
+    let halaman = document.getElementById("halaman").value;
+    let harga = document.getElementById("jenis").value;
+    let total = halaman * harga || 0;
+
+    document.getElementById("total").innerText =
+        "Rp " + total.toLocaleString("id-ID");
+}
+
+function kirimWA() {
+    let nama = document.getElementById("nama").value;
+    let halaman = document.getElementById("halaman").value;
+    let harga = document.getElementById("jenis").value;
+    let total = halaman * harga;
+
+    if (!nama || !halaman) {
+        alert("Mohon lengkapi data!");
+        return;
+    }
+
+    let pesan = `Halo, saya ${nama}
+Ingin jastip print:
+- Jumlah halaman: ${halaman}
+- Total harga: Rp ${total.toLocaleString("id-ID")}`;
+
+    let nomorWA = "628XXXXXXXXXX"; // GANTI NOMOR WA
+    let url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+
+    window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
